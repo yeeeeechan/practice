@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>실습_이미지 바꾸기</title>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <style>
+    div {
+      text-align: center;
+    }
+    .fruits {
+      width: 450px;
+      height: 450px;
+      object-fit: cover;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="image">
+    <img src="./image/fruits.jpg" alt="image" class="fruits"/>
+  </div>
+
+  <div>
+    <input type="button" onclick="changeImage('사과')" value="사과" />
+    <input type="button" onclick="changeImage('바나나')" value="바나나" />
+    <input type="button" onclick="changeImage('포도')" value="포도" />
+    <input type="button" onclick="changeImage('복숭아')" value="복숭아" />
+  </div>
+
+  <script>
+    const fruitVal = $("input").val();
+
+    function changeImage(fruitVal) {
+      const fruit = $(".fruits")
+
+      if(fruitVal == "사과") {
+        fruit.attr("src", "./image/apple.jpg")
+      } else if(fruitVal == "바나나") {
+        fruit.attr("src", "./image/banana.jpg")
+      } else if(fruitVal == "포도") {
+        fruit.attr("src", "./image/grape.jpg")
+      } else {
+        fruit.attr("src", "./image/peach.jpg")
+      }
+    }
+  </script>
+</body>
+</html>
