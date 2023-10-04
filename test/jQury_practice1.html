@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>jQeury 연습</title>
+    <script
+      src="https://code.jquery.com/jquery-3.7.0.min.js"
+      integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+      crossorigin="anonymous"
+    ></script>
+
+    <style>
+      .container {
+        background-color: skyblue;
+        display: flex;
+        height: 150px;
+      }
+
+      .item {
+        width: 100px;
+        height: 100px;
+        margin: 10px;
+      }
+
+      .pink {
+        background-color: pink;
+      }
+
+      .green {
+        background-color: lightgreen;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="item pink"></div>
+      <div class="item pink"></div>
+      <div class="item pink"></div>
+    </div>
+
+    <button type="button" onclick="usePrepend();">prepend</button>
+    <button type="button" onclick="useAppend();">append</button>
+    <button type="button" onclick="useBefore();">before</button>
+    <button type="button" onclick="useAfter();">after</button>
+    <button type="button" onclick="useRemove();">remove</button>
+    <button type="button" onclick="useEmpty();">empty</button>
+
+    <script>
+      function usePrepend() {
+        $('.container').prepend('<div class="item green"></div>')
+      }
+      function useAppend() {
+        $('.container').append('<div class="item green"></div>')
+      }
+      function useBefore() {
+        $('.container').before('<div class="item green"></div>')
+      }
+      function useAfter() {
+        $('.container').after('<div class="item green"></div>')
+      }
+
+      function useRemove() {
+        $('.container').remove()
+      }
+
+      function useEmpty() {
+        $('.container').empty()
+      }
+    </script>
+  </body>
+</html>
