@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>백엔드 연습</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <form name="joinCat">
+    이름 <input type="text" name="name" />
+
+    <fieldset>
+      <legend>생년월일</legend>
+      <select name="birthYear">
+        <% for (let i = 2023; i >= 1990;  i--) { %>
+        <option value="<%= i %>"><%= i %></option>
+        <% } %>
+      </select> 년
+      <select name="birthMonth">
+        <% for (let i = 1; i <= 12;  i++) { %>
+        <option value="<%= i %>"><%= i %></option>
+        <% } %>
+      </select> 월
+      <select name="birthDay">
+        <% for (let i = 1; i <= 31;  i++) { %>
+        <option value="<%= i %>"><%= i %></option>
+        <% } %>
+      </select> 일
+    </fieldset>
+
+    <fieldset>
+      <legend>고영고영</legend>
+      <input type="radio" name="catSelect" value="samSaek" />삼색
+      <input type="radio" name="catSelect" value="godeung" />고등어
+      <input type="radio" name="catSelect" value="cheese" />치즈
+      <input type="radio" name="catSelect" value="tuxedo" />턱시도
+    </fieldset>
+
+    <button onclick="axiosPost()"> 날아라 고양이 </button>
+  </form>
+
+  <h3 id="joinMsg"> 대체 안 되는 이유가 뭘까?ㅜ </h3>
+
+  <script>
+    function getData() {
+      const form = document.forms["joinCat"]
+
+      const data = {
+        name: form.name.value,
+        birth: form.birthYear.value + "-" + form.birthMonth.value + "-" + form.birthDay.value,
+        cat: form.catSelect.value,
+      }
+      return data
+    }
+
+    function axiosPost() {
+      const data = getData()
+
+      const res = axios({
+        method: 'post',
+        url: '/axiosPost',
+        data: data,
+      }).then((res) => {
+        console.log("res", res)
+        console.log("res.data", res.data)
+
+        $("#joinMsg").html(`${res.data.name} 님, ${res.data.cat} 고양이와 함께해요!`)
+      })
+    }
+  </script>
+</body>
+
+</html>
