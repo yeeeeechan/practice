@@ -1,0 +1,47 @@
+@font-face {
+    font-family: 'KCC-Sonkeechung';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2212@1.0/KCC-Sonkeechung.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.navbar .navbar-brand {
+    font-family: 'KCC-Sonkeechung';
+}
+
+.hover-text {
+    font-family: 'KCC-Sonkeechung';
+    text-align: center;
+    position: absolute;
+    opacity: 0;
+    transition: all ease 0.5s;
+    margin-left: 45%;
+    margin-top: 13%;
+}
+
+body {
+
+}
+
+.block {
+    margin: 50px;
+}
+
+.card-img {
+    display: flex;
+    justify-content: space-evenly;       
+}
+
+.card-img-top {
+    height: 300px;
+    object-fit: cover;
+}
+
+.slide {
+
+}
+
+.carousel-inner {
+    height: 500px;
+    object-fit: cover;
+}

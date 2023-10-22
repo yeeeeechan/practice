@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>1007 실습_웹 페이지</title>
+  <link rel="stylesheet" href="./1007 webpage.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://code.jquery.com/jquery-3.7.1.slim.js" integrity="sha256-UgvvN8vBkgO0luPSUl2s8TIlOSYRoGFAX4jlCIm9Adc=" crossorigin="anonymous"></script>
+</head>
+<body>
+  <!-- 
+    1. 상단 이미지 클릭하면 정보 입력 팝업 뜨고
+    2. 정보 입력 후 'send' 누르면 '제출되었습니다!' 팝업
+    3. 아래 카드 이미지에는 '더 많은 여행 정보'
+  -->
+
+  <!-- Header -->
+  <nav class="navbar navbar-expand-lg bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">With</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Link</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Dropdown
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><hr class="dropdown-divider" /></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled">Disabled</a>
+          </li>
+        </ul>
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="어디로 가고 싶으세요?" aria-label="Search" />
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Slide img -->
+  <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active">
+        <img src="./img/flight-1.jpg" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="./img/flight-3.jpg" class="d-block w-100" alt="...">
+      </div>
+      <div class="carousel-item">
+        <img src="./img/flight-5.jpg" class="d-block w-100" alt="...">
+      </div>
+        <!-- Hover text -->
+        <div class="hover-text">
+          <h3> 최고의 여행 메이트, <br/> With </h3>
+        </div>
+    </div>
+  </div>
+
+  <!-- Card img -->
+  <div class="block"></div>
+  <div class="card-img">
+    <div class="card" style="width: 18rem;">
+      <img src="./img/card-1.jpg" class="card-img-top" alt="">
+      <div class="card-body">
+        <p class="card-text"> Maecenas porttitor placerat leo quis auctor.</p>
+      </div>
+    </div>
+
+    <div class="card" style="width: 18rem;">
+      <img src="./img/card-1.jpg" class="card-img-top" alt="">
+      <div class="card-body">
+        <p class="card-text">Morbi in tortor venenatis, dignissim quam id, placerat urna.</p>
+      </div>
+    </div>
+
+    <div class="card" style="width: 18rem;">
+      <img src="./img/card-1.jpg" class="card-img-top" alt="">
+      <div class="card-body">
+        <p class="card-text">Curabitur luctus massa et lorem venenatis pharetra.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hover -->
+  <script>
+    $(document).ready(function() {
+      $(".carousel-item").hover(
+        function() {
+          $(this).css("opacity", 0.6);
+        },
+        function() {
+          $(this).css("opacity", 1);
+        }
+      );
+    });
+
+    $(document).ready(function() {
+      $(".carousel-item").hover(function() {
+        $(".hover-text").css("opacity", 1);
+      }, function() {
+        $(".hover-text").css("opacity", 0);
+      });
+    });
+
+    // 클릭했을 때 서비스를 신청할 신청자 정보를 입력하는 팝업창이 뜬다. (팝업창은 부트스트랩으로)
+    $(".carousel-inner").click(function() {
+
+    })
+
+  </script>
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+</body>
+</html>
