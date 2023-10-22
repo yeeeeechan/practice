@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> 파일 업로드 실습 </title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <fieldset>
+    <legend> 가입 정보 (일반 전송) </legend>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+      <input type="text" name="id" placeholder="아이디" /> <br />
+      <input type="text" name="pw" placeholder="비밀번호" /> <br />
+      <input type="text" name="name" placeholder="이름" /> <br />
+      <input type="text" name="age" placeholder="나이" /> <br /> <br />
+      <input type="file" name="profile">
+      <button type="submit"> 회원가입 </button>
+
+    </form>
+  </fieldset>
+  <br /> <br />
+  <fieldset>
+    <legend> 가입 정보 (동적 폼 전송) </legend>
+    <form name="dynamicForm">
+      <input type="text" name="id" placeholder="아이디" /> <br />
+      <input type="text" name="pw" placeholder="비밀번호" /> <br />
+      <input type="text" name="name" placeholder="이름" /> <br />
+      <input type="text" name="age" placeholder="나이" /> <br /> <br />
+      <input type="file" name="profile">
+      <button type="button" onclick="dynamicUpload()"> 회원가입 </button>
+    </form>
+  </fieldset>
+
+  <div id="dynamicResult"></div>
+
+  <script>
+    function dynamicUpload() {
+      const form = document.forms["dynamicForm"]
+
+      const formData = new FormData()
+      formData.append("profile", form.profile.files[0]) //
+      formData.append("id", form.id.value)
+      formData.append("age", form.age.value)
+      formData.append("name", form.name.value)
+
+      console.log("form.profile.files :", form.profile.files)
+
+
+      axios({
+        method: "post",
+        url: "/upload-dynamic",
+        data: formData,
+        headers: {
+          "Content-type": "multipart/form-data"
+        }
+      }).then((res) => {
+        console.log("res.data", res.data)
+        const result = document.getElementById("dynamicResult")
+        const {
+          src,
+          id,
+          age,
+          name
+        } = res.data
+        result.innerHTML =
+          `<div>
+            <img src=${src} width = 200px />
+            <h4> ${id} 님, 환영합니다! </h4>
+            <ul>
+              <li> 이름: ${name}</li>
+              <li> 나이: ${age}</li>
+            </ul>
+          </div>`
+      })
+    }
+  </script>
+</body>
+
+</html>
