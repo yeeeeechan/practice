@@ -44,6 +44,7 @@ app.post(
       ...req.body,
       src: req.file.path,
     });
+    console.log(req.body);
   }
 );
 
