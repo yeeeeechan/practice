@@ -25,11 +25,13 @@ exports.loginUser = (data, cb) => {
       throw err;
     }
 
-    //conn.query 함수는 쿼리의 결과를 배열로 반환하므로, if문의 조건을 길이로 설정함
+    // conn.query 함수는 쿼리의 결과를 배열로 반환하므로, if문의 조건을 길이로 설정함
+    // (sql 결과 id와 pw가 일치하는 데이터가 있으면 배열 길이는 0 이상이 된다.)
     let selectResult = false;
     if (result.length > 0) {
       selectResult = true;
     }
+    console.log("result", result);
     cb(selectResult);
   });
 };

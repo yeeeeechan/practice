@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <title>방명록</title>
+</head>
+
+<body>
+  <form name="posting">
+    <fieldset>
+      <legend> 방명록 등록 </legend>
+      <input type="text" name="userid" placeholder="사용자 이름" /> <br />
+      <input type="text" name="contents" placeholder="내용" /> <br />
+      <div class="btn-group">
+        <button type="botton" onclick="addData()"> 등록 </button>
+      </div>
+    </fieldset>
+  </form>
+  <br />
+  <table border="1" cellpadding="10" cellspacing="0">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>작성자</th>
+        <th>내용</th>
+        <th>수정</th>
+        <th>삭제</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% for(let i=0 ; i< data.length ; i++) {%>
+      <tr id="tr_<%= data[i].id %>">
+        <td><%= data[i].id %></td>
+        <td><%= data[i].username %></td>
+        <td><%= data[i].content %></td>
+        <td><button type="button" onclick="">수정</button></td>
+        <td><button type="button" onclick="">삭제</button></td>
+      </tr>
+      <% } %>
+    </tbody>
+  </table>
+
+  <script>
+    function addData() {
+      const form = document.forms["posting"]
+      const data = {
+        userid: form.userid.value,
+        contents: form.contents.value
+      }
+
+      axios({
+        method: "post",
+        url: "/visitors",
+        data: data
+      }).then((res) => {
+        const {
+          id,
+          userid,
+          contents
+        } = res.data
+
+        $("tbody").append(
+          `<tr id="tr_${id}">
+            <td>${id}</td>
+            <td>${userid}</td>
+            <td>${contents}</td>
+            <td><button type="button" onclick="">수정</button></td>
+            <td><button type="button" onclick="">삭제</button></td>
+          </tr>`
+        )
+      })
+    }
+
+    function update(id) {
+      axios({
+        method: 'get',
+        url: `visitors/${id}`,
+      }).then((res) => {
+        const {
+          userid,
+          contents
+        } = res.data
+
+
+        const form = document.forms['posting']
+        form.userid.value = userid
+        form.contents.value = contents
+
+        $(".btn-group").html(`
+          <button type='button' onclick='editDo(${id})> 변경 </button>'
+          <button type='button' onclick='editCancel()> 취소 </button>'
+        `)
+      })
+    }
+  </script>
+</body>
+
+</html>
