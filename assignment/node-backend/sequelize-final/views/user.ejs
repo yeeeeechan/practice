@@ -13,10 +13,12 @@
       const form = document.forms['userForm']
       const hiddenId = form.hidden_id.value
 
+      console.log("form.hidden_id.value", hiddenId)
+
       const data = {
         userid: form.userid.value,
         name: form.name.value,
-        pw: form.password.value,
+        pw: form.password.value
       }
 
       axios({
@@ -33,7 +35,7 @@
     }
 
     function userDelete() {
-      const form = document.forms['userform']
+      const form = document.forms['userForm']
       const hiddenId = form.hidden_id.value
 
       console.log("form.hidden_id.value", hiddenId)
@@ -43,8 +45,8 @@
         url: `/user/delete/${hiddenId}`,
       }).then((res) => {
         if (res.data.result) {
-          $('msg').html('탈퇴 처리가 완료되었습니다.').css('color', 'green')
-          document.location.href = '/login'
+          alert("회원 탈퇴가 정상적으로 처리되었습니다.")
+          document.location.href = '/'
         } else {
           $('msg').html('오류! 관리자에게 문의하세요.').css('color', 'red')
         }
@@ -56,10 +58,10 @@
 <body>
   <form name="userForm">
     <fieldset>
-      <input type="hidden" name="hidden_id" value="<%= data.id %>" id="hidden_id" />
-      <input type="text" name="userid" placeholder="아이디" required /> <br />
-      <input type="text" name="name" placeholder="이름" required /> <br />
-      <input type="password" name="password" placeholder="비밀번호" required />
+      <input type="hidden" name="hidden_id" value="<%= data.id %>" />
+      <input type="text" name="userid" value="<%= data.userid %>" /> <br />
+      <input type="text" name="name" placeholder="이름" value="<%=data.name%>" /> <br />
+      <input type="password" name="password" placeholder="비밀번호" value="<%=data.pw%>" />
       <button type="button" onclick="userEdit()">수정</button>
       <button type="button" onclick="userDelete()">탈퇴</button>
     </fieldset>

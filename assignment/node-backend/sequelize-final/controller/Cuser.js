@@ -39,20 +39,20 @@ exports.login = (req, res) => {
 };
 
 exports.user_page = (req, res) => {
-  console.log("user 페이지로 넘어오며 요청된 req.body 값", req.body);
-
+  console.log("user 페이지로 넘어오며 요청된 req.body 값", req.body.id_hidden);
+  const pk = req.body.id_hidden;
   User.findOne({
-    where: { id: req.body },
+    where: {
+      id: pk,
+    },
   }).then((result) => {
-    console.log("id 값", result);
-    if (result) res.render("user", { data: result });
-    else res.redirect("main");
+    res.render("user", { data: result });
+    console.log("user_page result: ", result);
   });
-  //  왜 if else문에 대괄호를 빼야 서버가 정상 작동하는지?
 };
 
 exports.edit = (req, res) => {
-  console.log("req data 확인!", req.body);
+  console.log("req data 확인!", req.params);
   const id = req.params.id;
 
   const data = {
@@ -60,6 +60,7 @@ exports.edit = (req, res) => {
     name: req.body.name,
     pw: req.body.pw,
   };
+
   User.update(data, {
     where: { id: id },
   }).then((result) => {
@@ -70,7 +71,8 @@ exports.edit = (req, res) => {
 
 exports.delete = (req, res) => {
   const id = req.params.id;
-  User.destroy(data, {
+
+  User.destroy({
     where: { id: id },
   }).then((result) => {
     console.log("삭제 결과", result);

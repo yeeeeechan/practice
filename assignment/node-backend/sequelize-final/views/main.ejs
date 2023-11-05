@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+  <title>로그인</title>
+
+  <script>
+    function login() {
+      const form = document.forms["loginForm"]
+
+      const data = {
+        userid: form.userid.value,
+        pw: form.pw.value
+      }
+
+      axios({
+        method: "post",
+        url: "/login",
+        data: data,
+        headers: {
+          "Content-Type": "application/json"
+        },
+      }).then((res) => {
+        console.log("res.data.result: ", res)
+
+        if (res.data.length != 0) {
+          alert("로그인되었습니다.")
+
+          // 로그인한 데이터의 id값을 hidden form에 담아두고, 
+          // 해당 form을 제출되도록 하여 "/user" 페이지로 이동
+
+          // res.data.id = undefined?
+          console.log("res.data.id", res.data.id)
+
+          // 
+          const loginInfo = document.forms['login-info']
+          loginInfo.id_hidden.value = res.data.id
+          loginInfo.submit()
+        } else {
+          $("#resultMsg2").html(`아이디와 비밀번호를 확인하세요.`).css('color', 'red')
+        }
+      })
+    }
+  </script>
+</head>
+
+<body>
+  <form name="loginForm">
+    <fieldset>
+      <legend> 로그인 </legend>
+      <input type="text" name="userid" placeholder="로그인 아이디" required /> <br />
+      <input type="password" name="pw" placeholder="비밀번호" required />
+      <button type="button" onclick="login()"> 로그인 </button>
+    </fieldset>
+  </form>
+  <form action="/user" name="login-info" method="post">
+    <input type="hidden" name="id_hidden">
+  </form>
+  <div id="resultMsg2"></div>
+
+  <a href="/join"> 회원가입 </a>
+</body>
+
+</html>
